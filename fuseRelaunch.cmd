@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "secureip" -o "/home/fafaaa/image_processing_spartan6/ctrl_fsm_test_isim_beh.exe" -prj "/home/fafaaa/image_processing_spartan6/ctrl_fsm_test_beh.prj" "work.ctrl_fsm_test" 

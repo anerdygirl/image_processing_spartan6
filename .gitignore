@@ -1,0 +1,25 @@
+# ISE/EDK build products
+*.log
+*.xmsgs/
+*_summary.html
+*.lso
+*.wdb
+*.bmm
+iseconfig/
+xst/
+_xmsgs/
+
+# Core Generator temp/regenerable output (only keep the .xco)
+ipcore_dir/tmp/
+ipcore_dir/*/tmp/
+ipcore_dir/*/_xmsgs/
+ipcore_dir/*.lso
+ipcore_dir/coregen.log
+
+# ISim simulation build artifacts
+isim/
+sim_test/isim/
+sim_test/*.log
+sim_test/testbench_sim
+*.exe
+*.exe.sim/

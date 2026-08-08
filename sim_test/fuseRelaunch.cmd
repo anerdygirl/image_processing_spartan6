@@ -1,0 +1,1 @@
+-o "testbench_sim" "work.functions_test" -mt "off" 
