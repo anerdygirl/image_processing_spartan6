@@ -62,15 +62,9 @@
       <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="InputAdded"/>
       <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputChanged"/>
-      <outfile xil_pn:name="ctrl_fsm.vhd"/>
-      <outfile xil_pn:name="ctrl_fsm_test.vhd"/>
-      <outfile xil_pn:name="functions_test.vhd"/>
-      <outfile xil_pn:name="img_src.vhd"/>
-      <outfile xil_pn:name="img_src_test.vhd"/>
-      <outfile xil_pn:name="pixel_pkg.vhd"/>
-      <outfile xil_pn:name="processing_test.vhd"/>
-      <outfile xil_pn:name="processing_top1.vhd"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1786131774" xil_pn:name="TRAN_xawsToSimhdl" xil_pn:prop_ck="1871823650159932783" xil_pn:start_ts="1786131774">
       <status xil_pn:value="SuccessfullyRun"/>
@@ -97,19 +91,9 @@
       <status xil_pn:value="OutOfDateForPredecessor"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputChanged"/>
-      <outfile xil_pn:name="ctrl_fsm.vhd"/>
-      <outfile xil_pn:name="ctrl_fsm_test.vhd"/>
-      <outfile xil_pn:name="functions_test.vhd"/>
-      <outfile xil_pn:name="img_src.vhd"/>
-      <outfile xil_pn:name="img_src_test.vhd"/>
-      <outfile xil_pn:name="ipcore_dir/frame_gray/frame_gray.vhd"/>
-      <outfile xil_pn:name="ipcore_dir/frame_in/frame_in.vhd"/>
-      <outfile xil_pn:name="ipcore_dir/frame_out/frame_out.vhd"/>
-      <outfile xil_pn:name="ipcore_dir/img_rom/img_rom.vhd"/>
-      <outfile xil_pn:name="pixel_pkg.vhd"/>
-      <outfile xil_pn:name="processing_test.vhd"/>
-      <outfile xil_pn:name="processing_top1.vhd"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1786131871" xil_pn:in_ck="2510725129317315805" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="7905805647637379678" xil_pn:start_ts="1786131870">
       <status xil_pn:value="SuccessfullyRun"/>
@@ -119,24 +103,20 @@
       <status xil_pn:value="OutOfDateForPredecessor"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputChanged"/>
-      <outfile xil_pn:name="ctrl_fsm_test_beh.prj"/>
-      <outfile xil_pn:name="ctrl_fsm_test_isim_beh.exe"/>
-      <outfile xil_pn:name="fuse.log"/>
-      <outfile xil_pn:name="isim"/>
-      <outfile xil_pn:name="isim.log"/>
-      <outfile xil_pn:name="xilinxsim.ini"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1786131999" xil_pn:in_ck="2291583861837911162" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="-1700499208486226005" xil_pn:start_ts="1786131999">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForProperties"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputChanged"/>
-      <outfile xil_pn:name="ctrl_fsm_test_isim_beh.wdb"/>
-      <outfile xil_pn:name="isim.cmd"/>
-      <outfile xil_pn:name="isim.log"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
   </transforms>
 
