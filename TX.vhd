@@ -55,6 +55,7 @@ architecture Behavioral of TX is
 						SEND_WL, 	-- send width bottom half
 						SEND_HH, 	-- height top half
 						SEND_HL,		-- height bottom half
+						WAIT_PIX, 
                   SEND_PIX_HI, -- current px top half, 1st uart frame (px width is 16btis and uart frame is 8bits)
 						SEND_PIX_LO, -- current px bottom half
 						SEND_END, 	-- ended px transmission
@@ -111,46 +112,46 @@ begin
 			end if;
 			
 		  when SEND_HL =>
-			if busy = '0' and send = '0' then
-				din <= std_logic_vector(to_unsigned(IMG_HEIGHT, 16)(7 downto 0));
-				send <= '1';
-				state <= SEND_PIX_HI;
-			end if;
-				
+			  if busy = '0' and send = '0' then
+				 din <= std_logic_vector(to_unsigned(IMG_HEIGHT, 16)(7 downto 0));
+				 send <= '1';
+				 rd_addr <= std_logic_vector(to_unsigned(0, ADDR_WIDTH));  -- request pixel 0
+				 state <= WAIT_ROM_PIX;   -- go wait for frame_out to respond
+			  end if;
 
-        when SEND_PIX_HI =>
-          if busy = '0' and send = '0' then
-            rd_addr <= std_logic_vector(to_unsigned(pix_cnt, ADDR_WIDTH));
-            din <= rd_data(15 downto 8);
-            send    <= '1';
-            state   <= SEND_PIX_LO;
-          end if;
+			when WAIT_ROM_PIX =>
+			  -- one full cycle passes here, doing nothing, just letting frame_out's
+			  -- output catch up to the address we set last cycle
+			  state <= SEND_PIX_HI;
 
-        when SEND_PIX_LO =>
-          if busy = '0' and send = '0' then
-            din <= rd_data(7 downto 0);
-            send    <= '1';
-            if pix_cnt = IMG_WIDTH*IMG_HEIGHT - 1 then
-              state <= SEND_END;
-            else
-              pix_cnt <= pix_cnt + 1;
-              state   <= SEND_PIX_HI;
-            end if;
-          end if;
+			when SEND_PIX_HI =>
+			  if busy = '0' and send = '0' then
+				 din <= rd_data(15 downto 8);   -- rd_data is now valid
+				 send <= '1';
+				 state <= SEND_PIX_HI2;         -- separate "confirm sent" step, see below
+			  end if;
 
-        when SEND_END =>
-          if busy = '0' and send = '0' then
-            din <= x"55";  -- FRAME_END_MARKER
-            send    <= '1';
-            state   <= DONE_ST;
-          end if;
+			when SEND_PIX_HI2 =>
+			  if busy = '0' and send = '0' then
+				 din <= rd_data(7 downto 0);    -- same pixel, low byte, no new address needed
+				 send <= '1';
+				 state <= SEND_PIX_LO;
+			  end if;
 
-        when DONE_ST =>
-          if busy = '0' and send = '0' then
-            done <= '1';
-          end if;
-      end case;
-    end if;
+			when SEND_PIX_LO =>
+			  if busy = '0' and send = '0' then
+				 if pix_cnt = IMG_WIDTH*IMG_HEIGHT - 1 then
+					din <= x"55";
+					send <= '1';
+					state <= SEND_END;
+				 else
+					pix_cnt  <= pix_cnt + 1;
+					rd_addr  <= std_logic_vector(to_unsigned(pix_cnt + 1, ADDR_WIDTH));
+					state    <= WAIT_ROM_PIX;   -- back to the BRAM wait before the next pixel's HIGH byte
+				 end if;
+			  end if;
+			 end case;
+		  end if;
   end process;
 
 end Behavioral;
