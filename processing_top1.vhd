@@ -46,7 +46,8 @@ entity processing_top1 is
            sel : in  STD_LOGIC_VECTOR (1 downto 0);
 			  src_select: out std_logic;
            px_in_addr : out  STD_LOGIC_VECTOR (ADDR_WIDTH-1 downto 0);
-           px_out_addr : out  STD_LOGIC_VECTOR (ADDR_WIDTH-1 downto 0));
+           px_out_addr : out  STD_LOGIC_VECTOR (ADDR_WIDTH-1 downto 0);
+			  px_out_valid : out STD_LOGIC);   -- NEW: high for exactly one cycle when px_out/px_out_addr are valid to write
 end processing_top1;
 
 architecture Behavioral of processing_top1 is
@@ -56,8 +57,11 @@ signal count, row, col : integer;
 signal px_result: std_logic_vector(PIXEL_WIDTH-1 downto 0);
 signal window: pixel_window;
 signal single_px: STD_LOGIC_VECTOR (PIXEL_WIDTH-1 downto 0); --for passthrough
+signal px_out_valid_sig : std_logic;
+signal px_out_we        : std_logic_vector(0 downto 0);
 
 begin
+	px_out_we(0) <= px_out_valid_sig;
 	process(clk, rst)
   variable addr : integer;
 	begin
@@ -69,6 +73,7 @@ begin
 		 done        <= '0';
 
 	  elsif rising_edge(clk) then
+		 px_out_valid <= '0';  -- default every cycle, mirrors tx's 'send <= 0' pattern
 		 case fetch_state is
 
 			when FETCH =>
@@ -121,6 +126,7 @@ begin
 
 			  px_out     <= px_result;
 			  px_out_addr <= std_logic_vector(to_unsigned(row * IMG_WIDTH + col, px_out_addr'length));
+			  px_out_valid <= '1';   -- NEW: this cycle's px_out/px_out_addr are genuinely valid, write them now
 
 			  count <= 0;
 			  if col = IMG_WIDTH - 1 then

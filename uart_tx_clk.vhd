@@ -33,7 +33,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity uart_tx_clk is						
 	generic (
 		 CLK_FREQ  : integer := 100_000_000; -- 100MHz, Spartan 6's internal clk freq
-		 BAUD_RATE : integer := 115200
+		 BAUD_RATE : integer := 115200 -- uart's baud rate
 	  );
 	 Port ( clk : in  STD_LOGIC;
            rst : in  STD_LOGIC;
@@ -75,7 +75,7 @@ architecture Behavioral of uart_tx_clk is
 		 if rst = '1' then
 			state <= IDLE; uart_txd <= '1'; busy <= '0';
 		 elsif rising_edge(clk) then
-			if bit_tick = '1' then
+			if (state = IDLE) or (bit_tick = '1') then
 			  case state is
 				 when IDLE =>
 					if send = '1' then

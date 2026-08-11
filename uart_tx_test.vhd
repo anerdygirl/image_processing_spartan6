@@ -70,7 +70,7 @@ BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
    uut: uart_tx_clk 
-		generic map (CLK_FREQ => 1000, BAUD_RATE => 100)  -- fake, fast ratio for testing purposes
+		generic map (CLK_FREQ => 200, BAUD_RATE => 100)  -- fake, fast ratio for testing purposes
 		PORT MAP (
           clk => clk,
           rst => rst,
@@ -91,13 +91,12 @@ BEGIN
 
     send <= '1';
 	 din <= "01010011";
-	 wait for 20 ns;
+	 wait until busy = '1'; 
 	 send <= '0';
-	 
 	 wait until busy = '0';
-
-	 wait; -- MANDATORY FOR EVERY TESTBENCH OTHERWISE IT'LL GO ON AN INFINITE LOOP FROM THE START
 	 report "uart frame transmitted";
+	 wait; -- MANDATORY FOR EVERY TESTBENCH OTHERWISE IT'LL GO ON AN INFINITE LOOP FROM THE START
+
    end process;
 
 END;
