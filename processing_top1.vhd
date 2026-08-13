@@ -134,6 +134,7 @@ begin
 				 if row = IMG_HEIGHT - 1 then
 					row  <= 0;
 					done <= '1';
+					fetch_state <= FETCH;
 				 else
 					row <= row + 1;
 					fetch_state <= FETCH;

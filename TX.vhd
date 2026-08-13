@@ -19,6 +19,7 @@
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use ieee.numeric_std.all;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -30,7 +31,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity TX is
-  generic (IMG_WIDTH : integer := 160; IMG_HEIGHT : integer := 120; ADDR_WIDTH : integer := 15);
+  generic (IMG_WIDTH : integer := 160; IMG_HEIGHT : integer := 120; ADDR_WIDTH : integer := 15; CLK_FREQ: integer := 100_000_000;
+				BAUD_RATE : integer := 115200);
   port (
     clk, rst, en : in  std_logic;
     done         : out std_logic;
@@ -55,7 +57,8 @@ architecture Behavioral of TX is
 						SEND_WL, 	-- send width bottom half
 						SEND_HH, 	-- height top half
 						SEND_HL,		-- height bottom half
-						WAIT_PIX, 
+						WAIT_ROM_PIX,
+						SEND_PIX_HI2,
                   SEND_PIX_HI, -- current px top half, 1st uart frame (px width is 16btis and uart frame is 8bits)
 						SEND_PIX_LO, -- current px bottom half
 						SEND_END, 	-- ended px transmission
@@ -65,7 +68,7 @@ architecture Behavioral of TX is
 
 begin
 
-  uart_byte_inst : uart_tx_clk port map (clk=>clk, 
+  uart_byte_inst : uart_tx_byte port map (clk=>clk, 
 													rst=>rst, 
 													send=>send,
 													din=>din, 
@@ -102,6 +105,13 @@ begin
 				din <= std_logic_vector(to_unsigned(IMG_WIDTH, 16)(7 downto 0));
 				send <= '1';
 				state <= SEND_HH;
+			end if;
+			
+			when SEND_WH =>
+			if busy = '0' and send = '0' then
+				 din <= std_logic_vector(to_unsigned(IMG_WIDTH, 16)(7 downto 0));
+				 send <= '1';
+				 state <= SEND_WL;
 			end if;
 			
 		  when SEND_HH =>
@@ -150,6 +160,19 @@ begin
 					state    <= WAIT_ROM_PIX;   -- back to the BRAM wait before the next pixel's HIGH byte
 				 end if;
 			  end if;
+			  
+			when SEND_END =>
+				if busy = '0' and send = '0' then
+					state <= DONE_ST;
+				end if;
+
+			when DONE_ST =>
+				done <= '1';
+				if en = '0' then
+					state <= IDLE;
+					pix_cnt <= 0;
+				end if;
+				
 			 end case;
 		  end if;
   end process;

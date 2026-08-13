@@ -30,11 +30,24 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity top_level is
+  generic (
+    IMG_WIDTH  : integer := 160;
+    IMG_HEIGHT : integer := 120;
+    ADDR_WIDTH : integer := 15
+  );
 -- wire all components together into a big single piece
 	port(
     clk, rst   : in  std_logic;
     sel        : in  std_logic_vector(1 downto 0);   -- from DIP switches
-    uart_txd   : out std_logic                          -- to USB-UART bridge
+    uart_txd   : out std_logic;                          -- to USB-UART bridge
+	 
+	 -- for tb purposes only. to be removed later
+	 dbg_capture_done    : out std_logic;
+    dbg_processing_done : out std_logic;
+    dbg_tx_done         : out std_logic;
+	 dbg_capture_en       : out std_logic;
+	 dbg_process_en        : out std_logic;
+	 dbg_tx_en              : out std_logic
 	);
 end top_level;
 
@@ -51,6 +64,7 @@ architecture Behavioral of top_level is
     tx_done         : in  std_logic
   );
 	end component;
+	signal process_en, processing_done : std_logic;
 	
 	component img_src
 	generic (
@@ -88,6 +102,8 @@ architecture Behavioral of top_level is
 			addrb : in std_logic_vector(14 downto 0);
 			doutb : out std_logic_vector(15 downto 0));
 	end component;
+	signal px_out_valid_sig : std_logic;
+	signal px_out_we : std_logic_vector(0 downto 0);
 	
 	component processing_top1
 	generic (
@@ -115,7 +131,7 @@ architecture Behavioral of top_level is
 	-- uart_tx_clk is internal to TX. not needed here
 	
 	component TX
-	generic (IMG_WIDTH, IMG_HEIGHT , ADDR_WIDTH : integer);
+	generic (IMG_WIDTH, IMG_HEIGHT , ADDR_WIDTH, CLK_FREQ, BAUD_RATE : integer);
 	port(
 		clk, rst, en : in  std_logic;
 		 done         : out std_logic;
@@ -130,6 +146,13 @@ architecture Behavioral of top_level is
 	-- uart_txd is a top_level ENTITY port (uart cable), not an internal signal — goes straight to the physical pin
 	
 begin
+	px_out_we(0) <= px_out_valid_sig;
+	dbg_capture_done    <= capture_done;
+	dbg_processing_done <= processing_done;
+	dbg_tx_done          <= tx_done;
+	dbg_capture_en        <= capture_en;
+	dbg_process_en          <= process_en;
+	dbg_tx_en                <= tx_en;
 
 	img_src_inst : img_src
 	  generic map (IMG_WIDTH => 160, IMG_HEIGHT => 120, ADDR_WIDTH => 15)
@@ -196,7 +219,7 @@ begin
 	frame_out_inst : frame_out
 		port map (
 			clka  => clk,
-			wea   => px_out_valid_sig,   -- driven by processing_top's new output
+			wea   => px_out_we,   -- driven by processing_top's new output
 			addra => px_out_addr_sig,
 			dina  => px_out_sig,
 			clkb  => clk,
