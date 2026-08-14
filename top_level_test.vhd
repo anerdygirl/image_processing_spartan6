@@ -49,18 +49,21 @@ begin
   -- at mid-bit intervals, checks the stop bit, records the byte.
   rx_proc: process
     variable byte_val : std_logic_vector(7 downto 0);
+	 constant BIT_PERIOD : time := 1 sec / TB_BAUD; -- 1 bit period = 1000 ms / 115200 / 100MHz ticks = ~8.6805 us (8680.5 ns)
   begin
     wait until falling_edge(uart_txd);              -- start bit detected
-    wait for (TICKS_PER_BIT * 15) * 1 ns;                -- 1.5 bit periods: land mid-bit-0
+    wait for BIT_PERIOD * 1.5;                -- 1.5 bit periods: land mid-bit-0
     for i in 0 to 7 loop
       byte_val(i) := uart_txd;
-      wait for TICKS_PER_BIT * 20 ns;                 -- advance one full bit period
+      wait for BIT_PERIOD;                 -- advance one full bit period
     end loop;
     -- uart_txd should now be high (stop bit) -- not asserted here, just informational
     received(received_count) <= byte_val;
     report "RX byte #" & integer'image(received_count) & " = " &
            integer'image(to_integer(unsigned(byte_val)));
     received_count <= received_count + 1;
+	 -- Wait for stop bit to finish before looking for next start bit
+	 wait for BIT_PERIOD / 2;
   end process;
 
   stim: process

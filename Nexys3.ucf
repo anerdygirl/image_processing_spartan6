@@ -1,0 +1,37 @@
+## ============================================================
+## UCF for image_processing_spartan6 / top_level
+## Target board: Digilent Nexys 3 (Rev B), Spartan-6 XC6SLX16-CSG324
+## ============================================================
+
+## ---------------- Clock ----------------
+NET "clk" LOC = "V10" | IOSTANDARD = "LVCMOS33";   # 100MHz onboard oscillator
+NET "clk" TNM_NET = sys_clk_pin;
+TIMESPEC TS_sys_clk_pin = PERIOD sys_clk_pin 100000 kHz;
+
+## ---------------- Reset ----------------
+## Using the center pushbutton (BTNS) as active-high reset.
+## NOTE: no debounce logic implemented yet -- a raw mechanical button bounce
+## could cause a spurious extra reset pulse. Fine for demo/bring-up; add a
+## debounce module later if this causes flaky behavior.
+NET "rst" LOC = "B8" | IOSTANDARD = "LVCMOS33";    # BTNS (center button)
+
+## ---------------- Algorithm select (sel) ----------------
+## sel(0) -> SW0, sel(1) -> SW1
+## "00" = grayscale, "01" = sobel, "10" = median, "11" = passthrough
+NET "sel<0>" LOC = "T10" | IOSTANDARD = "LVCMOS33"; # SW0
+NET "sel<1>" LOC = "T9"  | IOSTANDARD = "LVCMOS33"; # SW1
+
+## ---------------- UART ----------------
+## Nexys 3 USB-UART bridge, FPGA-side pins per Digilent reference manual (N17/N18)
+NET "uart_txd" LOC = "N18" | IOSTANDARD = "LVCMOS33"; # TxD, FPGA -> PC
+
+## ---------------- Debug outputs (temporary) ----------------
+## Mirrors ctrl_fsm's en/done handshakes onto the onboard LEDs so
+## progress can be checked visually without a serial terminal.
+## Remove or repurpose these once bring-up is confirmed working.
+NET "dbg_capture_en"     LOC = "U16" | IOSTANDARD = "LVCMOS33"; # LD0
+NET "dbg_capture_done"   LOC = "V16" | IOSTANDARD = "LVCMOS33"; # LD1
+NET "dbg_process_en"     LOC = "U15" | IOSTANDARD = "LVCMOS33"; # LD2
+NET "dbg_processing_done" LOC = "V15" | IOSTANDARD = "LVCMOS33"; # LD3
+NET "dbg_tx_en"          LOC = "M11" | IOSTANDARD = "LVCMOS33"; # LD4
+NET "dbg_tx_done"        LOC = "N11" | IOSTANDARD = "LVCMOS33"; # LD5

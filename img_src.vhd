@@ -109,48 +109,63 @@ begin
   px_sum  <= (px_r * to_unsigned(77,8)) + (px_g * to_unsigned(150,8)) + (px_b * to_unsigned(29,8));
   px_gray <= px_sum(15 downto 8);
 
-  process(clk, rst)
-  begin
-    if rst = '1' then
-      state <= IDLE; addr_cnt <= 0; fin_we <= "0"; fgray_we <= "0"; done <= '0';
+	process(clk, rst)
+	  begin
+		 if rst = '1' then
+			state      <= IDLE; 
+			addr_cnt   <= 0; 
+			fin_we     <= "0"; 
+			fgray_we   <= "0"; 
+			done       <= '0';
+			rom_addr   <= (others => '0');
+			fin_addr   <= (others => '0');
+			fgray_addr <= (others => '0');
 
-    elsif rising_edge(clk) then
-      case state is
-        when IDLE =>
-          done <= '0';
-          if en = '1' then
-            rom_addr <= (others => '0');
-            state    <= WAIT_ROM;
-          end if;
+		 elsif rising_edge(clk) then
+			case state is
+			  when IDLE =>
+				 done     <= '0';
+				 fin_we   <= "0";
+				 fgray_we <= "0";
+				 if en = '1' then
+					rom_addr <= (others => '0');
+					state    <= WAIT_ROM;
+				 end if;
 
-        when WAIT_ROM =>
-          -- one cycle for the ROM's first read to land before we start writing
-          state <= CAPTURE;
+			  when WAIT_ROM =>
+				 -- 1 clock cycle latency for Block ROM read output
+				 state <= CAPTURE;
 
-        when CAPTURE =>
-          fin_addr   <= std_logic_vector(to_unsigned(addr_cnt, ADDR_WIDTH));
-          fin_din    <= rom_data;
-          fin_we     <= "1";
-          fgray_addr <= std_logic_vector(to_unsigned(addr_cnt, ADDR_WIDTH));
-          fgray_din  <= std_logic_vector(px_gray);
-          fgray_we   <= "1";
+			  when CAPTURE =>
+				 fin_addr   <= std_logic_vector(to_unsigned(addr_cnt, ADDR_WIDTH));
+				 fin_din    <= rom_data;
+				 fin_we     <= "1";
+				 
+				 fgray_addr <= std_logic_vector(to_unsigned(addr_cnt, ADDR_WIDTH));
+				 fgray_din  <= std_logic_vector(px_gray);
+				 fgray_we   <= "1";
 
-          if addr_cnt = IMG_WIDTH*IMG_HEIGHT - 1 then
-            state <= DONE_ST;
-          else
-            addr_cnt <= addr_cnt + 1;
-            rom_addr <= std_logic_vector(to_unsigned(addr_cnt + 1, ADDR_WIDTH));
-          end if;
+				 if addr_cnt = (IMG_WIDTH * IMG_HEIGHT - 1) then
+					state <= DONE_ST;
+				 else
+					addr_cnt <= addr_cnt + 1;
+					rom_addr <= std_logic_vector(to_unsigned(addr_cnt + 1, ADDR_WIDTH));
+				 end if;
 
-        when DONE_ST =>
-          fin_we <= "0"; fgray_we <= "0"; done <= '1';
-          if en = '0' then
-            state <= IDLE;
-            addr_cnt <= 0;
-          end if;
-      end case;
-    end if;
-  end process;
+			  when DONE_ST =>
+				 -- Immediately disable write enables on entry
+				 fin_we   <= "0"; 
+				 fgray_we <= "0"; 
+				 done     <= '1';
+				 
+				 if en = '0' then
+					state    <= IDLE;
+					addr_cnt <= 0;
+				 end if;
+
+			end case;
+		 end if;
+	  end process;
 
 end Behavioral;
 

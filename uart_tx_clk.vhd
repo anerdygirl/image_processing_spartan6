@@ -48,7 +48,7 @@ architecture Behavioral of uart_tx_clk is
   signal tick_cnt : integer range 0 to TICKS_PER_BIT-1 := 0;
   signal bit_tick : std_logic := '0';
 
-  type state_t is (IDLE, START, DATA, STOP);
+  type state_t is (IDLE, DATA, STOP);
   signal state     : state_t := IDLE;
   signal shift_reg : std_logic_vector(7 downto 0);	-- takes val of data frame, 8 bits
   signal bit_idx   : integer range 0 to 7 := 0;
@@ -73,37 +73,40 @@ architecture Behavioral of uart_tx_clk is
 	  process(clk, rst)
 	  begin
 		 if rst = '1' then
-			state <= IDLE; uart_txd <= '1'; busy <= '0';
-		 elsif rising_edge(clk) then
-			if (state = IDLE) or (bit_tick = '1') then
-			  case state is
-				 when IDLE =>
-					if send = '1' then
-					  shift_reg <= din;
-					  busy      <= '1';
-					  uart_txd  <= '0';       -- start bit
-					  state     <= START;
+			state <= IDLE; uart_txd <= '1'; busy <= '0'; bit_idx  <= 0;
+		elsif rising_edge(clk) then
+			case state is
+				when IDLE =>
+				  busy <= '0';
+				  uart_txd <= '1';
+				  if send = '1' then
+					 shift_reg <= din;
+					 busy      <= '1';
+					 uart_txd  <= '0';
+					 bit_idx   <= 0;
+					 state     <= DATA;
+				  end if;
+
+				when DATA =>
+					busy <= '1';
+					if bit_tick = '1' then
+						uart_txd <= shift_reg(bit_idx);
+						if bit_idx = 7 then
+							state <= STOP;
+						else
+							bit_idx <= bit_idx + 1;
+						end if;
 					end if;
 
-				 when START =>
-					bit_idx <= 0;
-					state   <= DATA;
-
-				 when DATA =>
-					uart_txd <= shift_reg(bit_idx);
-					if bit_idx = 7 then
-					  state <= STOP;
-					else
-					  bit_idx <= bit_idx + 1;
+				when STOP =>
+					busy <= '1';
+					if bit_tick = '1' then
+						uart_txd <= '1';   -- Stop bit
+						state    <= IDLE;  -- Back to IDLE
 					end if;
 
-				 when STOP =>
-					uart_txd <= '1';          -- stop bit
-					busy     <= '0';
-					state    <= IDLE;
-			  end case;
-			end if;
-		 end if;
-	  end process;
+			end case;
+		end if;
+		end process;
 end Behavioral;
 

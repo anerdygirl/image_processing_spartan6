@@ -155,7 +155,9 @@ begin
 	dbg_tx_en                <= tx_en;
 
 	img_src_inst : img_src
-	  generic map (IMG_WIDTH => 160, IMG_HEIGHT => 120, ADDR_WIDTH => 15)
+	  generic map (IMG_WIDTH  => IMG_WIDTH,   -- Passes top_level's generic
+						 IMG_HEIGHT => IMG_HEIGHT,  -- Passes top_level's generic
+						 ADDR_WIDTH => ADDR_WIDTH)
 	  port map (
 		 clk => clk,
 		 rst => rst,
@@ -167,8 +169,11 @@ begin
 	  );
 	  
 	tx_inst : tx
-		generic map (IMG_WIDTH => 160, IMG_HEIGHT => 120, ADDR_WIDTH => 15,
-					CLK_FREQ => 100_000_000, BAUD_RATE => 115200)
+		generic map (IMG_WIDTH  => IMG_WIDTH,   -- Passes top_level's generic
+						 IMG_HEIGHT => IMG_HEIGHT,  -- Passes top_level's generic
+						 ADDR_WIDTH => ADDR_WIDTH, 
+						 --ADDR_WIDTH => 15,
+						 CLK_FREQ => 100_000_000, BAUD_RATE => 115200)
 		port map (
 			clk => clk,
 			rst => rst,

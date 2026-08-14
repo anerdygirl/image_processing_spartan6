@@ -1,0 +1,3 @@
+xst -intstyle ise -ifn "/home/fafaaa/image_processing_spartan6/top_level.xst" -ofn "/home/fafaaa/image_processing_spartan6/top_level.syr" 
+ngdbuild -intstyle ise -dd _ngo -sd ipcore_dir/frame_gray -sd ipcore_dir/frame_in -sd ipcore_dir/img_rom -sd ipcore_dir/frame_out -nt timestamp -uc Nexys3.ucf -p xc6slx16-csg324-3 top_level.ngc top_level.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o top_level_map.ncd top_level.ngd top_level.pcf 
