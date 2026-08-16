@@ -31,7 +31,7 @@ use ieee.numeric_std.all;
 --use UNISIM.VComponents.all;
 
 entity TX is
-  generic (IMG_WIDTH : integer := 160; IMG_HEIGHT : integer := 120; ADDR_WIDTH : integer := 15; CLK_FREQ: integer := 100_000_000;
+  generic (IMG_WIDTH : integer := 80; IMG_HEIGHT : integer := 60; ADDR_WIDTH : integer := 13; CLK_FREQ: integer := 100_000_000;
 				BAUD_RATE : integer := 115200);
   port (
     clk, rst, en : in  std_logic;
@@ -44,6 +44,7 @@ end TX;
 
 architecture Behavioral of TX is
   component uart_tx_clk
+	generic (CLK_FREQ, BAUD_RATE : integer);
     port (clk, rst, send : in std_logic; din : in std_logic_vector(7 downto 0);
           busy : out std_logic; uart_txd : out std_logic);
   end component;
@@ -52,7 +53,8 @@ architecture Behavioral of TX is
   signal din       : std_logic_vector(7 downto 0);
 
   type state_t is (IDLE, 		-- wait for en signal from ctrl_fsm to start transmission
-						WAIT_BYTE_DONE, -- pause state for all uart transmisisons. avoid deadlock
+						WAIT_BUSY_HIGH, -- Wait for uart_tx_clk to set busy = '1'
+						WAIT_BYTE_DONE, -- Wait for uart_tx_clk to return to busy = '0'
 						SEND_WH, 	-- send width top half (for @ calc)
 						SEND_WL, 	-- send width bottom half
 						SEND_HH, 	-- height top half
@@ -67,12 +69,14 @@ architecture Behavioral of TX is
 
 begin
 
-  uart_byte_inst : uart_tx_clk port map (clk=>clk, 
-													rst=>rst, 
-													send=>send,
-													din=>din, 
-													busy=>busy, 
-													uart_txd=>uart_txd);
+  uart_byte_inst : uart_tx_clk generic map(CLK_FREQ  => CLK_FREQ,
+														BAUD_RATE => BAUD_RATE)
+										 port map (clk=>clk, 
+														rst=>rst, 
+														send=>send,
+														din=>din, 
+														busy=>busy, 
+														uart_txd=>uart_txd);
 
   process(clk, rst)
   begin
@@ -87,12 +91,18 @@ begin
         din        <= x"AA";     -- Byte 1: Start Marker
         send       <= '1';       -- Trigger UART
         next_state <= SEND_WH;   -- Next byte will be Width High
-        state      <= WAIT_BYTE_DONE; -- Go through the deadlock-prevention state!
+        state      <= WAIT_BUSY_HIGH; -- Go through the deadlock-prevention state!
+      end if;
+
+	when WAIT_BUSY_HIGH =>
+      -- Wait until uart_tx_clk acknowledges send by raising busy
+      if busy = '1' then
+        state <= WAIT_BYTE_DONE;
       end if;
 
     when WAIT_BYTE_DONE => 
-      -- Wait until UART module picks up 'send' and finishes transmitting
-      if busy = '0' and send = '0' then
+      -- Wait until uart_tx_clk finishes transmitting
+      if busy = '0' then
         state <= next_state;
       end if;
 
@@ -100,36 +110,39 @@ begin
       din        <= std_logic_vector(to_unsigned(IMG_WIDTH, 16)(15 downto 8));
       send       <= '1';
       next_state <= SEND_WL;
-      state      <= WAIT_BYTE_DONE;
+      state      <= WAIT_BUSY_HIGH;
 
     when SEND_WL =>
       din        <= std_logic_vector(to_unsigned(IMG_WIDTH, 16)(7 downto 0));
       send       <= '1';
       next_state <= SEND_HH;
-      state      <= WAIT_BYTE_DONE;
+      state      <= WAIT_BUSY_HIGH;
 
     when SEND_HH =>
       din        <= std_logic_vector(to_unsigned(IMG_HEIGHT, 16)(15 downto 8));
       send       <= '1';
       next_state <= SEND_HL;
-      state      <= WAIT_BYTE_DONE;
+      state      <= WAIT_BUSY_HIGH;
 
     when SEND_HL =>
       din        <= std_logic_vector(to_unsigned(IMG_HEIGHT, 16)(7 downto 0));
       send       <= '1';
-      rd_addr    <= std_logic_vector(to_unsigned(0, ADDR_WIDTH)); -- Address pixel 0
       next_state <= WAIT_ROM_PIX;
-      state      <= WAIT_BYTE_DONE;
+      state      <= WAIT_BUSY_HIGH;
 
     when WAIT_ROM_PIX =>
+		-- request px N from ram
+      -- rd_addr    <= std_logic_vector(to_unsigned(0, ADDR_WIDTH)); -- Address pixel 0
+		rd_addr <= std_logic_vector(to_unsigned(pix_cnt, ADDR_WIDTH));
       -- 1 cycle latency for BRAM output to settle
       state <= SEND_PIX_HI;
 
     when SEND_PIX_HI =>
       din        <= rd_data(15 downto 8); -- High byte
+		--din <= "01010101"; -- Send 85 (0x55) for testing
       send       <= '1';
       next_state <= SEND_PIX_LO;
-      state      <= WAIT_BYTE_DONE;       
+      state      <= WAIT_BUSY_HIGH;       
 
     when SEND_PIX_LO =>
       din  <= rd_data(7 downto 0); -- Low byte
@@ -138,16 +151,15 @@ begin
         next_state <= SEND_END;
       else
         pix_cnt    <= pix_cnt + 1;
-        rd_addr    <= std_logic_vector(to_unsigned(pix_cnt + 1, ADDR_WIDTH));
         next_state <= WAIT_ROM_PIX;
       end if;
-      state <= WAIT_BYTE_DONE;
+      state <= WAIT_BUSY_HIGH;
 
     when SEND_END =>
       din        <= x"55"; -- Frame End Marker
       send       <= '1';
       next_state <= DONE_ST;
-      state      <= WAIT_BYTE_DONE;
+      state      <= WAIT_BUSY_HIGH;
 
     when DONE_ST =>
       done <= '1';

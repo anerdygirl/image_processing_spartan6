@@ -51,10 +51,21 @@ entity top_level is
 end top_level;
 
 architecture Behavioral of top_level is
-	-- for on-board debugging
-	signal frame_sent_once : std_logic := '0';
-	signal tx_done_gated    : std_logic;
-		
+--	-- for on-board debugging
+--	signal frame_sent_once : std_logic := '0';
+--	signal tx_done_gated    : std_logic;
+--	process(clk, rst)
+--	begin
+--	  if rst = '1' then
+--		 frame_sent_once <= '0';
+--	  elsif rising_edge(clk) then
+--		 if tx_done = '1' then
+--			frame_sent_once <= '1';  -- latch, stays 1 forever after first completion
+--		 end if;
+--	  end if;
+--	end process;
+--	tx_done_gated <= tx_done when frame_sent_once = '0' else '0';
+	
 	-- instanciate all + inner signals specific to each
 	component ctrl_fsm
 	port(    
@@ -107,6 +118,9 @@ architecture Behavioral of top_level is
 	end component;
 	signal px_out_sig                    : std_logic_vector(15 downto 0);  -- to frame_out
 	signal px_out_addr_sig               : std_logic_vector(ADDR_WIDTH-1 downto 0);  -- to frame_out
+	-- on-board debugging
+	signal frame_sent_once : std_logic := '0';
+	signal tx_done_gated    : std_logic;
 	
 	-- uart_tx_clk is internal to TX. not needed here
 	
@@ -137,8 +151,9 @@ architecture Behavioral of top_level is
 			 end if;
 		  end if;
 		end process;
+
 		tx_done_gated <= tx_done when frame_sent_once = '0' else '0';
-		
+
 		px_out_we(0) <= px_out_valid_sig;
 		dbg_processing_done <= processing_done;
 		dbg_tx_done          <= tx_done;
@@ -168,7 +183,7 @@ architecture Behavioral of top_level is
 				process_en => process_en,
 				processing_done => processing_done,
 				tx_en => tx_en,
-				tx_done => tx_done_gated --tx_done => tx_done
+				tx_done => tx_done_gated
 	  );
 	  
 	  rom_inst : img_rom
