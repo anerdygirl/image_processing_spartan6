@@ -50,6 +50,23 @@ fuseRelaunch.cmd
 impact_impact.xwbt
 impact.xsl
 *.gise
+*.bgn
+*.bld
+*.cmd_log
+*.map
+*.ngm
+*.pad.csv
+*.pad.txt
+*.ptwx
+*.stx
+*.unroutes
+*.usage.xml
+*.xpi
+*.xst
+*.xwbt
+*.xsl
+*.vho
+_envsettings.html
 
 # Core Generator build junk (keep .xco / coregen.cgp, ignore the rest)
 ipcore_dir/*/tmp/

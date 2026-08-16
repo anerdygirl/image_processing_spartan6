@@ -1,8 +1,0 @@
-vhdl work "uart_tx_clk.vhd"
-vhdl work "pixel_pkg.vhd"
-vhdl work "TX.vhd"
-vhdl work "processing_top1.vhd"
-vhdl work "ipcore_dir/img_rom/img_rom.vhd"
-vhdl work "ipcore_dir/frame_out/frame_out.vhd"
-vhdl work "ctrl_fsm.vhd"
-vhdl work "top_level.vhd"

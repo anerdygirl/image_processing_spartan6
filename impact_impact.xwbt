@@ -1,8 +1,0 @@
-INTSTYLE=impact
-INFILE=/home/fafaaa/image_processing_spartan6/impact.xsl
-OUTFILE=/home/fafaaa/image_processing_spartan6/impact.xsl
-FAMILY=Single
-PART=Single
-WORKINGDIR=/home/fafaaa/image_processing_spartan6
-LICENSE=iMPACT
-USER_INFO=iMPACT

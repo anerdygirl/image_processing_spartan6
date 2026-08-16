@@ -1,1 +1,0 @@
--o "top_level_sim" "work.top_level_test" -mt "off" 
