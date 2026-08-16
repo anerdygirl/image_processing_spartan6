@@ -1,0 +1,382 @@
+//! **************************************************************************
+// Written by: Map P.20131013 on Sun Aug 16 19:49:10 2026
+//! **************************************************************************
+
+SCHEMATIC START;
+COMP "clk" LOCATE = SITE "V10" LEVEL 1;
+COMP "dbg_processing_done" LOCATE = SITE "V15" LEVEL 1;
+COMP "rst" LOCATE = SITE "B8" LEVEL 1;
+COMP "dbg_tx_en" LOCATE = SITE "M11" LEVEL 1;
+COMP "dbg_process_en" LOCATE = SITE "U15" LEVEL 1;
+COMP "dbg_tx_done" LOCATE = SITE "N11" LEVEL 1;
+COMP "sel<0>" LOCATE = SITE "T10" LEVEL 1;
+COMP "sel<1>" LOCATE = SITE "T9" LEVEL 1;
+COMP "uart_txd" LOCATE = SITE "N18" LEVEL 1;
+PIN
+        rom_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/s6_init.ram/SP.SIMPLE_PRIM18.ram_pins<28>
+        = BEL
+        "rom_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/s6_init.ram/SP.SIMPLE_PRIM18.ram"
+        PINNAME CLKA;
+PIN
+        rom_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[2].ram.r/s6_init.ram/SP.SIMPLE_PRIM18.ram_pins<28>
+        = BEL
+        "rom_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[2].ram.r/s6_init.ram/SP.SIMPLE_PRIM18.ram"
+        PINNAME CLKA;
+PIN
+        rom_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[3].ram.r/s6_init.ram/SP.SIMPLE_PRIM18.ram_pins<28>
+        = BEL
+        "rom_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[3].ram.r/s6_init.ram/SP.SIMPLE_PRIM18.ram"
+        PINNAME CLKA;
+PIN
+        rom_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[4].ram.r/s6_init.ram/SP.SIMPLE_PRIM18.ram_pins<28>
+        = BEL
+        "rom_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[4].ram.r/s6_init.ram/SP.SIMPLE_PRIM18.ram"
+        PINNAME CLKA;
+PIN
+        rom_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[1].ram.r/s6_init.ram/SP.SIMPLE_PRIM18.ram_pins<28>
+        = BEL
+        "rom_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[1].ram.r/s6_init.ram/SP.SIMPLE_PRIM18.ram"
+        PINNAME CLKA;
+PIN
+        frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram_pins<28>
+        = BEL
+        "frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram"
+        PINNAME CLKA;
+PIN
+        frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram_pins<29>
+        = BEL
+        "frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram"
+        PINNAME CLKB;
+PIN
+        frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[2].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram_pins<28>
+        = BEL
+        "frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[2].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram"
+        PINNAME CLKA;
+PIN
+        frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[2].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram_pins<29>
+        = BEL
+        "frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[2].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram"
+        PINNAME CLKB;
+PIN
+        frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[3].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram_pins<28>
+        = BEL
+        "frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[3].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram"
+        PINNAME CLKA;
+PIN
+        frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[3].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram_pins<29>
+        = BEL
+        "frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[3].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram"
+        PINNAME CLKB;
+PIN
+        frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[4].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram_pins<28>
+        = BEL
+        "frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[4].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram"
+        PINNAME CLKA;
+PIN
+        frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[4].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram_pins<29>
+        = BEL
+        "frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[4].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram"
+        PINNAME CLKB;
+PIN
+        frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[1].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram_pins<28>
+        = BEL
+        "frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[1].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram"
+        PINNAME CLKA;
+PIN
+        frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[1].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram_pins<29>
+        = BEL
+        "frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[1].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram"
+        PINNAME CLKB;
+TIMEGRP sys_clk_pin = BEL "frame_sent_once" BEL
+        "processing_top_inst/done_cnt_3" BEL "processing_top_inst/done_cnt_2"
+        BEL "processing_top_inst/done_cnt_1" BEL
+        "processing_top_inst/done_cnt_0" BEL
+        "processing_top_inst/median_stage_2" BEL
+        "processing_top_inst/median_stage_1" BEL
+        "processing_top_inst/median_stage_0" BEL "processing_top_inst/col_6"
+        BEL "processing_top_inst/col_5" BEL "processing_top_inst/col_4" BEL
+        "processing_top_inst/col_3" BEL "processing_top_inst/col_2" BEL
+        "processing_top_inst/col_1" BEL "processing_top_inst/col_0" BEL
+        "processing_top_inst/fetch_state_FSM_FFd1" BEL
+        "processing_top_inst/row_5" BEL "processing_top_inst/row_4" BEL
+        "processing_top_inst/row_3" BEL "processing_top_inst/row_2" BEL
+        "processing_top_inst/row_1" BEL "processing_top_inst/row_0" BEL
+        "processing_top_inst/fetch_state_FSM_FFd2" BEL
+        "processing_top_inst/fetch_state_FSM_FFd3" BEL
+        "processing_top_inst/median_v_0_7" BEL
+        "processing_top_inst/median_v_0_6" BEL
+        "processing_top_inst/median_v_0_5" BEL
+        "processing_top_inst/median_v_0_4" BEL
+        "processing_top_inst/median_v_0_3" BEL
+        "processing_top_inst/median_v_0_2" BEL
+        "processing_top_inst/median_v_0_1" BEL
+        "processing_top_inst/median_v_0_0" BEL
+        "processing_top_inst/median_v_1_7" BEL
+        "processing_top_inst/median_v_1_6" BEL
+        "processing_top_inst/median_v_1_5" BEL
+        "processing_top_inst/median_v_1_4" BEL
+        "processing_top_inst/median_v_1_3" BEL
+        "processing_top_inst/median_v_1_2" BEL
+        "processing_top_inst/median_v_1_1" BEL
+        "processing_top_inst/median_v_1_0" BEL
+        "processing_top_inst/median_v_2_7" BEL
+        "processing_top_inst/median_v_2_6" BEL
+        "processing_top_inst/median_v_2_5" BEL
+        "processing_top_inst/median_v_2_4" BEL
+        "processing_top_inst/median_v_2_3" BEL
+        "processing_top_inst/median_v_2_2" BEL
+        "processing_top_inst/median_v_2_1" BEL
+        "processing_top_inst/median_v_2_0" BEL
+        "processing_top_inst/median_v_5_7" BEL
+        "processing_top_inst/median_v_5_6" BEL
+        "processing_top_inst/median_v_5_5" BEL
+        "processing_top_inst/median_v_5_4" BEL
+        "processing_top_inst/median_v_5_3" BEL
+        "processing_top_inst/median_v_5_2" BEL
+        "processing_top_inst/median_v_5_1" BEL
+        "processing_top_inst/median_v_5_0" BEL "processing_top_inst/px_out_15"
+        BEL "processing_top_inst/px_out_14" BEL
+        "processing_top_inst/px_out_13" BEL "processing_top_inst/px_out_12"
+        BEL "processing_top_inst/px_out_11" BEL
+        "processing_top_inst/px_out_10" BEL "processing_top_inst/px_out_9" BEL
+        "processing_top_inst/px_out_8" BEL "processing_top_inst/px_out_7" BEL
+        "processing_top_inst/px_out_6" BEL "processing_top_inst/px_out_5" BEL
+        "processing_top_inst/px_out_4" BEL "processing_top_inst/px_out_3" BEL
+        "processing_top_inst/px_out_2" BEL "processing_top_inst/px_out_1" BEL
+        "processing_top_inst/px_out_0" BEL "processing_top_inst/median_v_4_7"
+        BEL "processing_top_inst/median_v_4_6" BEL
+        "processing_top_inst/median_v_4_5" BEL
+        "processing_top_inst/median_v_4_4" BEL
+        "processing_top_inst/median_v_4_3" BEL
+        "processing_top_inst/median_v_4_2" BEL
+        "processing_top_inst/median_v_4_1" BEL
+        "processing_top_inst/median_v_4_0" BEL
+        "processing_top_inst/median_v_3_7" BEL
+        "processing_top_inst/median_v_3_6" BEL
+        "processing_top_inst/median_v_3_5" BEL
+        "processing_top_inst/median_v_3_4" BEL
+        "processing_top_inst/median_v_3_3" BEL
+        "processing_top_inst/median_v_3_2" BEL
+        "processing_top_inst/median_v_3_1" BEL
+        "processing_top_inst/median_v_3_0" BEL
+        "processing_top_inst/median_v_6_7" BEL
+        "processing_top_inst/median_v_6_6" BEL
+        "processing_top_inst/median_v_6_5" BEL
+        "processing_top_inst/median_v_6_4" BEL
+        "processing_top_inst/median_v_6_3" BEL
+        "processing_top_inst/median_v_6_2" BEL
+        "processing_top_inst/median_v_6_1" BEL
+        "processing_top_inst/median_v_6_0" BEL
+        "processing_top_inst/median_v_7_7" BEL
+        "processing_top_inst/median_v_7_6" BEL
+        "processing_top_inst/median_v_7_5" BEL
+        "processing_top_inst/median_v_7_4" BEL
+        "processing_top_inst/median_v_7_3" BEL
+        "processing_top_inst/median_v_7_2" BEL
+        "processing_top_inst/median_v_7_1" BEL
+        "processing_top_inst/median_v_7_0" BEL
+        "processing_top_inst/px_in_addr_12" BEL
+        "processing_top_inst/px_in_addr_11" BEL
+        "processing_top_inst/px_in_addr_10" BEL
+        "processing_top_inst/px_in_addr_9" BEL
+        "processing_top_inst/px_in_addr_8" BEL
+        "processing_top_inst/px_in_addr_7" BEL
+        "processing_top_inst/px_in_addr_6" BEL
+        "processing_top_inst/px_in_addr_5" BEL
+        "processing_top_inst/px_in_addr_4" BEL
+        "processing_top_inst/px_in_addr_3" BEL
+        "processing_top_inst/px_in_addr_2" BEL
+        "processing_top_inst/px_in_addr_1" BEL
+        "processing_top_inst/px_in_addr_0" BEL "processing_top_inst/gx_reg_10"
+        BEL "processing_top_inst/gx_reg_9" BEL "processing_top_inst/gx_reg_8"
+        BEL "processing_top_inst/gx_reg_7" BEL "processing_top_inst/gx_reg_6"
+        BEL "processing_top_inst/gx_reg_5" BEL "processing_top_inst/gx_reg_4"
+        BEL "processing_top_inst/gx_reg_3" BEL "processing_top_inst/gx_reg_2"
+        BEL "processing_top_inst/gx_reg_1" BEL "processing_top_inst/gx_reg_0"
+        BEL "processing_top_inst/gy_reg_10" BEL "processing_top_inst/gy_reg_9"
+        BEL "processing_top_inst/gy_reg_8" BEL "processing_top_inst/gy_reg_7"
+        BEL "processing_top_inst/gy_reg_6" BEL "processing_top_inst/gy_reg_5"
+        BEL "processing_top_inst/gy_reg_4" BEL "processing_top_inst/gy_reg_3"
+        BEL "processing_top_inst/gy_reg_2" BEL "processing_top_inst/gy_reg_1"
+        BEL "processing_top_inst/median_v_8_7" BEL
+        "processing_top_inst/median_v_8_6" BEL
+        "processing_top_inst/median_v_8_5" BEL
+        "processing_top_inst/median_v_8_4" BEL
+        "processing_top_inst/median_v_8_3" BEL
+        "processing_top_inst/median_v_8_2" BEL
+        "processing_top_inst/median_v_8_1" BEL
+        "processing_top_inst/median_v_8_0" BEL "processing_top_inst/count_3"
+        BEL "processing_top_inst/count_2" BEL "processing_top_inst/count_1"
+        BEL "processing_top_inst/count_0" BEL
+        "processing_top_inst/px_out_addr_12" BEL
+        "processing_top_inst/px_out_addr_11" BEL
+        "processing_top_inst/px_out_addr_10" BEL
+        "processing_top_inst/px_out_addr_9" BEL
+        "processing_top_inst/px_out_addr_8" BEL
+        "processing_top_inst/px_out_addr_7" BEL
+        "processing_top_inst/px_out_addr_6" BEL
+        "processing_top_inst/px_out_addr_5" BEL
+        "processing_top_inst/px_out_addr_4" BEL
+        "processing_top_inst/px_out_addr_3" BEL
+        "processing_top_inst/px_out_addr_2" BEL
+        "processing_top_inst/px_out_addr_1" BEL
+        "processing_top_inst/px_out_addr_0" BEL
+        "processing_top_inst/window_8_7" BEL "processing_top_inst/window_8_6"
+        BEL "processing_top_inst/window_8_5" BEL
+        "processing_top_inst/window_8_4" BEL "processing_top_inst/window_8_3"
+        BEL "processing_top_inst/window_8_2" BEL
+        "processing_top_inst/window_8_1" BEL "processing_top_inst/window_8_0"
+        BEL "processing_top_inst/window_6_7" BEL
+        "processing_top_inst/window_6_6" BEL "processing_top_inst/window_6_5"
+        BEL "processing_top_inst/window_6_4" BEL
+        "processing_top_inst/window_6_3" BEL "processing_top_inst/window_6_2"
+        BEL "processing_top_inst/window_6_1" BEL
+        "processing_top_inst/window_6_0" BEL "processing_top_inst/window_5_7"
+        BEL "processing_top_inst/window_5_6" BEL
+        "processing_top_inst/window_5_5" BEL "processing_top_inst/window_5_4"
+        BEL "processing_top_inst/window_5_3" BEL
+        "processing_top_inst/window_5_2" BEL "processing_top_inst/window_5_1"
+        BEL "processing_top_inst/window_5_0" BEL
+        "processing_top_inst/window_7_7" BEL "processing_top_inst/window_7_6"
+        BEL "processing_top_inst/window_7_5" BEL
+        "processing_top_inst/window_7_4" BEL "processing_top_inst/window_7_3"
+        BEL "processing_top_inst/window_7_2" BEL
+        "processing_top_inst/window_7_1" BEL "processing_top_inst/window_7_0"
+        BEL "processing_top_inst/window_4_7" BEL
+        "processing_top_inst/window_4_6" BEL "processing_top_inst/window_4_5"
+        BEL "processing_top_inst/window_4_4" BEL
+        "processing_top_inst/window_4_3" BEL "processing_top_inst/window_4_2"
+        BEL "processing_top_inst/window_4_1" BEL
+        "processing_top_inst/window_4_0" BEL "processing_top_inst/window_3_7"
+        BEL "processing_top_inst/window_3_6" BEL
+        "processing_top_inst/window_3_5" BEL "processing_top_inst/window_3_4"
+        BEL "processing_top_inst/window_3_3" BEL
+        "processing_top_inst/window_3_2" BEL "processing_top_inst/window_3_1"
+        BEL "processing_top_inst/window_3_0" BEL
+        "processing_top_inst/window_1_7" BEL "processing_top_inst/window_1_6"
+        BEL "processing_top_inst/window_1_5" BEL
+        "processing_top_inst/window_1_4" BEL "processing_top_inst/window_1_3"
+        BEL "processing_top_inst/window_1_2" BEL
+        "processing_top_inst/window_1_1" BEL "processing_top_inst/window_1_0"
+        BEL "processing_top_inst/window_0_7" BEL
+        "processing_top_inst/window_0_6" BEL "processing_top_inst/window_0_5"
+        BEL "processing_top_inst/window_0_4" BEL
+        "processing_top_inst/window_0_3" BEL "processing_top_inst/window_0_2"
+        BEL "processing_top_inst/window_0_1" BEL
+        "processing_top_inst/window_0_0" BEL "processing_top_inst/window_2_7"
+        BEL "processing_top_inst/window_2_6" BEL
+        "processing_top_inst/window_2_5" BEL "processing_top_inst/window_2_4"
+        BEL "processing_top_inst/window_2_3" BEL
+        "processing_top_inst/window_2_2" BEL "processing_top_inst/window_2_1"
+        BEL "processing_top_inst/window_2_0" BEL
+        "processing_top_inst/px_out_valid" BEL "processing_top_inst/done" BEL
+        "processing_top_inst/single_px_15" BEL
+        "processing_top_inst/single_px_14" BEL
+        "processing_top_inst/single_px_13" BEL
+        "processing_top_inst/single_px_12" BEL
+        "processing_top_inst/single_px_11" BEL
+        "processing_top_inst/single_px_10" BEL
+        "processing_top_inst/single_px_9" BEL
+        "processing_top_inst/single_px_8" BEL
+        "processing_top_inst/single_px_7" BEL
+        "processing_top_inst/single_px_6" BEL
+        "processing_top_inst/single_px_5" BEL
+        "processing_top_inst/single_px_4" BEL
+        "processing_top_inst/single_px_3" BEL
+        "processing_top_inst/single_px_2" BEL
+        "processing_top_inst/single_px_1" BEL
+        "processing_top_inst/single_px_0" BEL "tx_inst/pix_cnt_12" BEL
+        "tx_inst/pix_cnt_11" BEL "tx_inst/pix_cnt_10" BEL "tx_inst/pix_cnt_9"
+        BEL "tx_inst/pix_cnt_8" BEL "tx_inst/pix_cnt_7" BEL
+        "tx_inst/pix_cnt_6" BEL "tx_inst/pix_cnt_5" BEL "tx_inst/pix_cnt_4"
+        BEL "tx_inst/pix_cnt_3" BEL "tx_inst/pix_cnt_2" BEL
+        "tx_inst/pix_cnt_1" BEL "tx_inst/pix_cnt_0" BEL "tx_inst/din_7" BEL
+        "tx_inst/din_6" BEL "tx_inst/din_5" BEL "tx_inst/din_4" BEL
+        "tx_inst/din_3" BEL "tx_inst/din_2" BEL "tx_inst/din_1" BEL
+        "tx_inst/din_0" BEL "tx_inst/rd_addr_12" BEL "tx_inst/rd_addr_11" BEL
+        "tx_inst/rd_addr_10" BEL "tx_inst/rd_addr_9" BEL "tx_inst/rd_addr_8"
+        BEL "tx_inst/rd_addr_7" BEL "tx_inst/rd_addr_6" BEL
+        "tx_inst/rd_addr_5" BEL "tx_inst/rd_addr_4" BEL "tx_inst/rd_addr_3"
+        BEL "tx_inst/rd_addr_2" BEL "tx_inst/rd_addr_1" BEL
+        "tx_inst/rd_addr_0" BEL "tx_inst/done" BEL "tx_inst/state_3" BEL
+        "tx_inst/state_2" BEL "tx_inst/state_1" BEL "tx_inst/state_0" BEL
+        "tx_inst/next_state_3" BEL "tx_inst/next_state_2" BEL
+        "tx_inst/next_state_1" BEL "tx_inst/next_state_0" BEL "tx_inst/send"
+        BEL "tx_inst/uart_byte_inst/state_FSM_FFd1" BEL
+        "tx_inst/uart_byte_inst/state_FSM_FFd2" BEL
+        "tx_inst/uart_byte_inst/bit_idx_2" BEL
+        "tx_inst/uart_byte_inst/bit_idx_1" BEL
+        "tx_inst/uart_byte_inst/bit_idx_0" BEL
+        "tx_inst/uart_byte_inst/tick_cnt_9" BEL
+        "tx_inst/uart_byte_inst/tick_cnt_8" BEL
+        "tx_inst/uart_byte_inst/tick_cnt_7" BEL
+        "tx_inst/uart_byte_inst/tick_cnt_6" BEL
+        "tx_inst/uart_byte_inst/tick_cnt_5" BEL
+        "tx_inst/uart_byte_inst/tick_cnt_4" BEL
+        "tx_inst/uart_byte_inst/tick_cnt_3" BEL
+        "tx_inst/uart_byte_inst/tick_cnt_2" BEL
+        "tx_inst/uart_byte_inst/tick_cnt_1" BEL
+        "tx_inst/uart_byte_inst/tick_cnt_0" BEL "tx_inst/uart_byte_inst/busy"
+        BEL "tx_inst/uart_byte_inst/uart_txd" BEL
+        "tx_inst/uart_byte_inst/shift_reg_7" BEL
+        "tx_inst/uart_byte_inst/shift_reg_6" BEL
+        "tx_inst/uart_byte_inst/shift_reg_5" BEL
+        "tx_inst/uart_byte_inst/shift_reg_4" BEL
+        "tx_inst/uart_byte_inst/shift_reg_3" BEL
+        "tx_inst/uart_byte_inst/shift_reg_2" BEL
+        "tx_inst/uart_byte_inst/shift_reg_1" BEL
+        "tx_inst/uart_byte_inst/shift_reg_0" BEL
+        "ctrl_fsm_inst/state_FSM_FFd1" BEL "ctrl_fsm_inst/state_FSM_FFd2" BEL
+        "ctrl_fsm_inst/flush_cnt_5" BEL "ctrl_fsm_inst/flush_cnt_4" BEL
+        "ctrl_fsm_inst/flush_cnt_3" BEL "ctrl_fsm_inst/flush_cnt_2" BEL
+        "ctrl_fsm_inst/flush_cnt_1" BEL "ctrl_fsm_inst/flush_cnt_0" BEL
+        "processing_top_inst/median_stage_1_1" BEL
+        "processing_top_inst/median_stage_2_1" BEL
+        "processing_top_inst/median_stage_0_1" BEL
+        "processing_top_inst/median_stage_1_2" BEL
+        "processing_top_inst/median_stage_2_2" BEL
+        "processing_top_inst/median_stage_0_2" BEL "clk_BUFGP/BUFG" BEL
+        "rom_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/has_mux_a.A/sel_pipe_0"
+        BEL
+        "rom_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/has_mux_a.A/sel_pipe_1"
+        BEL
+        "rom_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/has_mux_a.A/sel_pipe_2"
+        PIN
+        "rom_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/s6_init.ram/SP.SIMPLE_PRIM18.ram_pins<28>"
+        PIN
+        "rom_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[2].ram.r/s6_init.ram/SP.SIMPLE_PRIM18.ram_pins<28>"
+        PIN
+        "rom_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[3].ram.r/s6_init.ram/SP.SIMPLE_PRIM18.ram_pins<28>"
+        PIN
+        "rom_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[4].ram.r/s6_init.ram/SP.SIMPLE_PRIM18.ram_pins<28>"
+        PIN
+        "rom_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[1].ram.r/s6_init.ram/SP.SIMPLE_PRIM18.ram_pins<28>"
+        BEL
+        "frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/has_mux_b.B/sel_pipe_0"
+        BEL
+        "frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/has_mux_b.B/sel_pipe_1"
+        BEL
+        "frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/has_mux_b.B/sel_pipe_2"
+        PIN
+        "frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram_pins<28>"
+        PIN
+        "frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[0].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram_pins<29>"
+        PIN
+        "frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[2].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram_pins<28>"
+        PIN
+        "frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[2].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram_pins<29>"
+        PIN
+        "frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[3].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram_pins<28>"
+        PIN
+        "frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[3].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram_pins<29>"
+        PIN
+        "frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[4].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram_pins<28>"
+        PIN
+        "frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[4].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram_pins<29>"
+        PIN
+        "frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[1].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram_pins<28>"
+        PIN
+        "frame_out_inst/U0/xst_blk_mem_generator/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[1].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram_pins<29>";
+TS_sys_clk_pin = PERIOD TIMEGRP "sys_clk_pin" 100 MHz HIGH 50%;
+SCHEMATIC END;
+

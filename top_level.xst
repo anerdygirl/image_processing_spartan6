@@ -15,7 +15,7 @@ run
 -rtlview Yes
 -glob_opt AllClockNets
 -read_cores YES
--sd {"ipcore_dir/frame_gray" "ipcore_dir/frame_in" "ipcore_dir/img_rom" "ipcore_dir/frame_out"  }
+-sd {"ipcore_dir/frame_out" "ipcore_dir/img_rom"  }
 -write_timing_constraints NO
 -cross_clock_analysis NO
 -hierarchy_separator /

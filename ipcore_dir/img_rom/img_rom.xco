@@ -1,7 +1,7 @@
 ##############################################################
 #
 # Xilinx Core Generator version 14.7
-# Date: Mon Aug  3 18:43:47 2026
+# Date: Fri Aug 14 23:16:10 2026
 #
 ##############################################################
 #
@@ -46,7 +46,7 @@ CSET axi_id_width=4
 CSET axi_slave_type=Memory_Slave
 CSET axi_type=AXI4_Full
 CSET byte_size=9
-CSET coe_file="/run/media/fafaaa/dih/PFA 2026/files/test_4x4.coe"
+CSET coe_file="/run/media/fafaaa/dih/PFA 2026/files/output.coe"
 CSET collision_warnings=ALL
 CSET component_name=img_rom
 CSET disable_collision_warnings=false
@@ -97,7 +97,7 @@ CSET use_regcea_pin=false
 CSET use_regceb_pin=false
 CSET use_rsta_pin=false
 CSET use_rstb_pin=false
-CSET write_depth_a=19200
+CSET write_depth_a=4800
 CSET write_width_a=16
 CSET write_width_b=16
 # END Parameters
@@ -105,4 +105,4 @@ CSET write_width_b=16
 MISC pkg_timestamp=2012-11-19T16:22:25Z
 # END Extra information
 GENERATE
-# CRC: 8b730813
+# CRC: d11b6f1b

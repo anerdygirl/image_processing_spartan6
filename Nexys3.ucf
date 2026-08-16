@@ -29,8 +29,8 @@ NET "uart_txd" LOC = "N18" | IOSTANDARD = "LVCMOS33"; # TxD, FPGA -> PC
 ## Mirrors ctrl_fsm's en/done handshakes onto the onboard LEDs so
 ## progress can be checked visually without a serial terminal.
 ## Remove or repurpose these once bring-up is confirmed working.
-NET "dbg_capture_en"     LOC = "U16" | IOSTANDARD = "LVCMOS33"; # LD0
-NET "dbg_capture_done"   LOC = "V16" | IOSTANDARD = "LVCMOS33"; # LD1
+#NET "dbg_capture_en"     LOC = "U16" | IOSTANDARD = "LVCMOS33"; # LD0
+#NET "dbg_capture_done"   LOC = "V16" | IOSTANDARD = "LVCMOS33"; # LD1
 NET "dbg_process_en"     LOC = "U15" | IOSTANDARD = "LVCMOS33"; # LD2
 NET "dbg_processing_done" LOC = "V15" | IOSTANDARD = "LVCMOS33"; # LD3
 NET "dbg_tx_en"          LOC = "M11" | IOSTANDARD = "LVCMOS33"; # LD4

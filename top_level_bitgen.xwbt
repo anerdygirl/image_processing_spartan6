@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=/home/fafaaa/image_processing_spartan6/top_level.ncd
+OUTFILE=/home/fafaaa/image_processing_spartan6/top_level.bit
+FAMILY=Spartan6
+PART=xc6slx16-3csg324
+WORKINGDIR=/home/fafaaa/image_processing_spartan6
+LICENSE=WebPack
+USER_INFO=212654193_0_0_672
