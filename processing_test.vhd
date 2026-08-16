@@ -49,7 +49,6 @@ ARCHITECTURE behavior OF processing_test IS
          px_in : IN  std_logic_vector(15 downto 0);
          px_out : OUT  std_logic_vector(15 downto 0);
          sel : IN  std_logic_vector(1 downto 0);
-         src_select : out  std_logic;
          px_in_addr : OUT  std_logic_vector(14 downto 0);
          px_out_addr : OUT  std_logic_vector(14 downto 0)
         );
@@ -66,7 +65,6 @@ ARCHITECTURE behavior OF processing_test IS
    signal en : std_logic := '0';
    signal px_in : std_logic_vector(15 downto 0) := (others => '0');
    signal sel : std_logic_vector(1 downto 0) := (others => '0');
-   signal src_select : std_logic := '0';
 
  	--Outputs
    signal done : std_logic;
@@ -96,7 +94,6 @@ BEGIN
           done => done,
           px_in => px_in,
           px_out => px_out,
-          sel => sel,
           src_select => src_select,
           px_in_addr => px_in_addr,
           px_out_addr => px_out_addr
