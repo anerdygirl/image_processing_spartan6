@@ -1,51 +1,59 @@
-<<<<<<< HEAD
-# ISE/EDK build products
-*.log
-*.xmsgs/
-*_summary.html
+# ISE build artifacts
+*.ncd
+*.ngc
+*.ngd
+*.ngm
+*.ngr
+*.bgn
+*.bld
+*.bit
+*.pad
+*.par
+*.pcf
+*.drc
+*.map*
+*.mrp
+*.stx
+*.syr
+*.twr
+*.twx
+*.ptwx
+*.unroutes
+*.ut
+*.xpi
+*.xst
+*.prj
 *.lso
-*.wdb
 *.bmm
-iseconfig/
-xst/
+*_summary.html
+*_summary.xml
+*.xrpt
+*.xreport
+*_pad.csv
+*_pad.txt
+*_envsettings.html
+webtalk*.xml
+webtalk*.log
+usage_statistics_webtalk.html
+par_usage_statistics.html
 _xmsgs/
+_ngo/
+xlnx_auto_0_xdb/
+xst/
+iseconfig/
+sim_test/
+isim.wdb
+*_isim_beh1.wdb
+fuse.log
+fuse.xmsgs
+fuseRelaunch.cmd
+impact_impact.xwbt
+impact.xsl
+*.gise
 
-# Core Generator temp/regenerable output (only keep the .xco)
-ipcore_dir/tmp/
+# Core Generator build junk (keep .xco / coregen.cgp, ignore the rest)
 ipcore_dir/*/tmp/
 ipcore_dir/*/_xmsgs/
-ipcore_dir/*.lso
+ipcore_dir/tmp/
+ipcore_dir/_xmsgs/
 ipcore_dir/coregen.log
-
-# ISim simulation build artifacts
-isim/
-sim_test/isim/
-sim_test/*.log
-sim_test/testbench_sim
-*.exe
-*.exe.sim/
-=======
-### AL ###
-#Template for AL projects for Dynamics 365 Business Central
-#launch.json folder
-.vscode/
-#Cache folder
-.alcache/
-#Symbols folder
-.alpackages/
-#Snapshots folder
-.snapshots/
-#Testing Output folder
-.output/
-#Extension App-file
-*.app
-#Rapid Application Development File
-rad.json
-#Translation Base-file
-*.g.xlf
-#License-files
-*.bclicense
-*.flf
-#Test results file
-TestResults.xml
->>>>>>> 66aeb07578664fb08ba4e1b2774136843c6ebbaa

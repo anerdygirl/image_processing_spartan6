@@ -1,2 +1,0 @@
-vhdl isim_temp "uart_tx_clk.vhd"
-vhdl isim_temp "uart_tx_test.vhd"

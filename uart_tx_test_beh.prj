@@ -1,2 +1,0 @@
-vhdl work "uart_tx_clk.vhd"
-vhdl work "uart_tx_test.vhd"

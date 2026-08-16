@@ -1,6 +1,0 @@
-vhdl isim_temp "pixel_pkg.vhd"
-vhdl isim_temp "ipcore_dir/img_rom/img_rom.vhd"
-vhdl isim_temp "ipcore_dir/frame_in/frame_in.vhd"
-vhdl isim_temp "ipcore_dir/frame_gray/frame_gray.vhd"
-vhdl isim_temp "img_src.vhd"
-vhdl isim_temp "img_src_test.vhd"

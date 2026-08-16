@@ -33,15 +33,17 @@ package pixel_pkg is
 -- constant <constant_name>		: time := <time_unit> ns;
 -- constant <constant_name>		: integer := <value;
 --
-	constant IMG_WIDTH  : integer := 160;
-	constant IMG_HEIGHT : integer := 120;
+	constant IMG_WIDTH  : integer := 80;
+	constant IMG_HEIGHT : integer := 60; -- used to be 160*120. reduced bc of physical resources constraints
 
-  constant R_MSB : natural := 15;
-  constant R_LSB : natural := 11;
-  constant G_MSB : natural := 10;
-  constant G_LSB : natural := 5;
-  constant B_MSB : natural := 4;
-  constant B_LSB : natural := 0;
+--not needed anymore apparently
+--  constant R_MSB : natural := 15;
+--  constant R_LSB : natural := 11;
+--  constant G_MSB : natural := 10;
+--  constant G_LSB : natural := 5;
+--  constant B_MSB : natural := 4;
+--  constant B_LSB : natural := 0;
+
   -- 3*3 window stuff
 	constant ROW_COL_LUT : t_lut := (
 	  0 => (r => -1, c => -1),
@@ -62,6 +64,7 @@ package pixel_pkg is
 -- procedure <procedure_name> (<type_declaration> <constant_name>	: in <type_declaration>);
 	function sobel( p : pixel_window ) return unsigned;
 	function median9(p : pixel_window) return unsigned;
+	function to_gray(rgb : std_logic_vector(15 downto 0)) return unsigned;
 	procedure sort2(variable a, b : inout unsigned(7 downto 0));
 --
 
@@ -76,19 +79,35 @@ package body pixel_pkg is
 --    <variable_name> := <signal_name> xor <signal_name>;
 --    return <variable_name>; 
 --  end <function_name>;
-	function sobel( p : pixel_window ) return unsigned is
-	  variable gx, gy, mag : integer;
+
+	function to_gray(rgb : std_logic_vector(15 downto 0)) return unsigned is
+		variable r_8, g_8, b_8 : unsigned(7 downto 0);
+		variable gray          : unsigned(7 downto 0);
 		begin
-		  gx := (-1*to_integer(p(0)) + 1*to_integer(p(2))
-				  -2*to_integer(p(3)) + 2*to_integer(p(5))
-				  -1*to_integer(p(6)) + 1*to_integer(p(8)));
+		r_8  := unsigned(rgb(15 downto 11) & "000");
+		g_8  := unsigned(rgb(10 downto 5)  & "00");
+		b_8  := unsigned(rgb(4 downto 0)   & "000");
+		gray := shift_right(r_8, 2) + shift_right(g_8, 1) + shift_right(b_8, 3);
+		return gray;
+	end function;
 
-		  gy := (-1*to_integer(p(0)) - 2*to_integer(p(1)) - 1*to_integer(p(2))
-				  + 1*to_integer(p(6)) + 2*to_integer(p(7)) + 1*to_integer(p(8)));
+	function sobel(p : pixel_window) return unsigned is
+	  variable gx, gy : signed(10 downto 0);
+	  variable mag    : signed(11 downto 0);
+	begin
+	  gx := signed(resize(p(2),11)) - signed(resize(p(0),11))
+			+ shift_left(signed(resize(p(5),11)), 1) - shift_left(signed(resize(p(3),11)), 1)
+			+ signed(resize(p(8),11)) - signed(resize(p(6),11));
 
-		  mag := abs(gx) + abs(gy);              -- approximation, avoids sqrt in hardware. too expensive
-		  if mag > 255 then mag := 255; end if;  -- clamp to 8-bit range
-		  return to_unsigned(mag, 8);
+	  gy := signed(resize(p(6),11)) + shift_left(signed(resize(p(7),11)), 1) + signed(resize(p(8),11))
+			- signed(resize(p(0),11)) - shift_left(signed(resize(p(1),11)), 1) - signed(resize(p(2),11));
+
+	  mag := resize(abs(gx),12) + resize(abs(gy),12);
+	  if mag > 255 then
+		 return to_unsigned(255, 8);
+	  else
+		 return unsigned(mag(7 downto 0));
+	  end if;
 	end function;
 
 ---- Example 2
