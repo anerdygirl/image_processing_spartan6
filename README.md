@@ -6,11 +6,11 @@ For my summer internship project, I designed and implemented a pure-VHDL image-p
 
 Adapted from a reference design that used a CMOS camera module and a MicroBlaze soft processor, but neither of which were available for this project. This implementation substitutes a preloaded ROM test image for live capture, and a pure VHDL finite-state-machine architecture for the soft processor.
 
-![Four side-by-side image-processing results of two white lilies among green foliage and yellow flowers: the top-left panel is titled Received frame (passthrough) and shows the original color image, the top-right is titled Received frame (grayscale) and shows the scene in gray tones, the bottom-left is titled Received frame (sobel) and shows high-contrast edges, and the bottom-right is titled Received frame (median) and shows a smoothed grayscale version. The panels document the same floral scene under four processing modes, with no people present.](test_results/grid.png)
+![Four side-by-side image-processing results of two white lilies among green foliage and yellow flowers: the top-left panel is titled Received frame (passthrough) and shows the original color image, the top-right is titled Received frame (grayscale) and shows the scene in gray tones, the bottom-left is titled Received frame (sobel) and shows high-contrast edges, and the bottom-right is titled Received frame (median) and shows a smoothed grayscale version. The panels document the same floral scene under four processing modes, with no people present.](<docs/additional results/lily_results.png>)
 Grayscale, Sobel edge detection, median filtering, and passthrough — all four modes, real hardware output.
 
 **source image:**
-![source image: lily flower](test_results/lily.jpg)
+![source image: lily flower](<docs/additional results/lily.jpg>)
 
 ## Architecture
 
@@ -29,8 +29,6 @@ img_rom → processing_top1 → frame_out → TX → UART → PC (receive_frame.
 | `processing_top1`    | Compute core — grayscale / Sobel / median / passthrough, runtime-selectable |
 | `frame_out`          | Output buffer, Block Memory Generator RAM                                   |
 | `TX` / `uart_tx_clk` | UART frame sequencer + byte-level transmitter (115200 baud)                 |
-
-See [`docs/report.pdf`](docs/report.pdf) for full architectural documentation, design justifications, and diagrams.
 
 ## Repository structure
 
@@ -92,7 +90,7 @@ python3 receive_frame.py --port /dev/ttyUSB0 --mode grayscale
 - Linux driver incompatibility: use `djtcgfg` command-line for programming the board
 
 ```bash
-djtgcfg prog -d Nexys3 -i 0 -f /your_generated_bitstream
+djtgcfg prog -d Nexys3 -i 0 -f /your_generated_bitstream_path
 ```
 
 ## Acknowledgments
